@@ -124,5 +124,4 @@
   cost: 2
   components:
   - type: ConfusedAccent
-    timeBetweenIncidents: 300, 600
-    durationOfIncident: 30, 90
+    chanceToScramble: 0.15

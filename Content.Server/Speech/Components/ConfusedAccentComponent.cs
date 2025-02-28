@@ -5,21 +5,16 @@ namespace Content.Server.Speech.Components;
 
 /// <summary>
 /// This is used for the confused trait.
+/// TODO: Replace with a random chance instead of a time
 /// </summary>
 [RegisterComponent, Access(typeof(ConfusedAccentSystem))]
 public sealed partial class ConfusedAccentComponent : Component
 {
     /// <summary>
-    /// The random time between incidents, (min, max).
+    /// Percent chance per message sent to be scrambled.
     /// </summary>
-    [DataField("timeBetweenIncidents", required: true)]
-    public Vector2 TimeBetweenIncidents { get; private set; }
+    [DataField]
+    public float ChanceToScramble = 1f;
 
-    /// <summary>
-    /// The duration of incidents, (min, max).
-    /// </summary>
-    [DataField("durationOfIncident", required: true)]
-    public Vector2 DurationOfIncident { get; private set; }
 
-    public float NextIncidentTime;
 }
