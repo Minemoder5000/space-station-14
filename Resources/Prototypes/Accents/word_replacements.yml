@@ -576,6 +576,15 @@
     accent-german-words-61-4: accent-german-words-replace-61
     accent-german-words-62: accent-german-words-replace-62
 
+    - type: accent
+  id: australian
+  wordReplacements:
+    accent-australian-words-1: accent-australian-words-replace-1
+    accent-australian-words-1-2: accent-australian-words-replace-1
+    accent-australian-words-2: accent-australian-words-replace-2
+    accent-australian-words-3: accent-australian-words-replace-3
+    accent-australian-words-3-2: accent-australian-words-replace-3
+
 - type: accent
   id: russian
   wordReplacements:
