@@ -117,10 +117,12 @@
 
 
 - type: trait
-  id: Confused
+  id: ConfusedAccent
   name: trait-confused-name
   description: trait-confused-desc
   category: SpeechTraits
   cost: 2
   components:
   - type: ConfusedAccent
+    timeBetweenIncidents: 300, 600
+    durationOfIncident: 30, 90

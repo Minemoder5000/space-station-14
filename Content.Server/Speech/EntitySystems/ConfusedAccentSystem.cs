@@ -6,11 +6,12 @@ namespace Content.Server.Speech.EntitySystems;
 
 /// <summary>
 /// This handles confusion, causing the affected to have scrambled speech at random intervals.
+/// Yes, I stole this from narcolepsy.
 /// </summary>
 public sealed class ConfusedAccentSystem : EntitySystem
 {
     [ValidatePrototypeId<StatusEffectPrototype>]
-    private const string StatusEffectKey = "ScrambledAccent"; //
+    private const string StatusEffectKey = "Stutter"; // Same as cryptobiolin and mercury
 
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -18,21 +19,13 @@ public sealed class ConfusedAccentSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<ConfusedAccentComponent, ComponentStartup>(Setupconfused);
+        SubscribeLocalEvent<ConfusedAccentComponent, ComponentStartup>(SetupConfusedAccent);
     }
 
-    private void Setupconfused(EntityUid uid, ConfusedAccentComponent accentComponent, ComponentStartup args)
+    private void SetupConfusedAccent(EntityUid uid, ConfusedAccentComponent accentComponent, ComponentStartup args)
     {
         accentComponent.NextIncidentTime =
             _random.NextFloat(accentComponent.TimeBetweenIncidents.X, accentComponent.TimeBetweenIncidents.Y);
-    }
-
-    public void AdjustconfusedTimer(EntityUid uid, int TimerReset, ConfusedAccentComponent? confused = null)
-    {
-        if (!Resolve(uid, ref confused, false))
-            return;
-
-        confused.NextIncidentTime = TimerReset;
     }
 
     public override void Update(float frameTime)
@@ -53,7 +46,7 @@ public sealed class ConfusedAccentSystem : EntitySystem
 
             var duration = _random.NextFloat(confused.DurationOfIncident.X, confused.DurationOfIncident.Y);
 
-            // Make sure the sleep time doesn't cut into the time to next incident.
+            // Make sure the confusion time doesn't cut into the time to next incident.
             confused.NextIncidentTime += duration;
 
             _statusEffects.TryAddStatusEffect<ScrambledAccentComponent>(uid, StatusEffectKey,

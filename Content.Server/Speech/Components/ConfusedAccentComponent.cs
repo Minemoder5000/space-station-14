@@ -4,7 +4,7 @@ using Content.Server.Speech.EntitySystems;
 namespace Content.Server.Speech.Components;
 
 /// <summary>
-/// This is used for the confusion trait.
+/// This is used for the confused trait.
 /// </summary>
 [RegisterComponent, Access(typeof(ConfusedAccentSystem))]
 public sealed partial class ConfusedAccentComponent : Component
