@@ -114,3 +114,13 @@
   cost: 2
   components:
   - type: FrontalLisp
+
+
+- type: trait
+  id: Confused
+  name: trait-confused-name
+  description: trait-confused-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: ConfusedAccent
