@@ -1084,7 +1084,7 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkSingarityBeacon
+  id: UplinkSingularityBeacon
   name: uplink-singularity-beacon-name
   description: uplink-singularity-beacon-desc
   productEntity: SingularityBeacon
@@ -2194,3 +2194,21 @@
   - !type:BuyerJobCondition
     whitelist:
     - MedicalDoctor
+
+# Glory
+
+- type: listing
+  id: UplinkSingularityBeaconDie
+  name: uplink-singularity-beacon-name
+  description: uplink-singularity-beacon-desc
+  productEntity: SingularityBeacon
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkGlory
+  conditions:
+  - !type:ObjectiveUnlockCondition
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

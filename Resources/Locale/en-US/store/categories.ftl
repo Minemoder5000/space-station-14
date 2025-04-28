@@ -13,6 +13,7 @@ store-category-job = Job
 store-category-wearables = Wearables
 store-category-pointless = Pointless
 store-discounted-items = Discounts
+store-category-dagd = Glory
 
 # Revenant
 store-category-abilities = Abilities

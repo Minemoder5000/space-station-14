@@ -64,6 +64,9 @@
       - EscapeShuttleCondition
       - StealCondition
   - type: DieCondition
+  - type: StoreUnlocker
+    listings:
+    - UplinkSingularityBeaconDie
 
 #- type: entity
 #  parent: [BaseTraitorObjective, BaseLivingObjective]
