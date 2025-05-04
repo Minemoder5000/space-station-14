@@ -108,6 +108,17 @@
     - Secret
 
 - type: gamePreset
+  id: SecretMRP
+  alias:
+    - secretmrp
+    - sekritmrp
+  name: secret-mrp-title
+  showInVote: true
+  description: secret-mrp-description
+  rules:
+    - SecretMRP
+
+- type: gamePreset
   id: SecretExtended #For Admin Use: Runs Extended but shows "Secret" in lobby.
   alias:
     - secretextended
