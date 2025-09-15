@@ -21,6 +21,9 @@ easy_mode = false
 [ooc]
 enable_during_round = false
 
+[looc]
+enabled = false
+
 [ic]
 flavor_text = true
 
