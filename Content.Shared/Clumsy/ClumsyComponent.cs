@@ -96,6 +96,12 @@ public sealed partial class ClumsyComponent : Component
     public bool ClumsyVaulting = true;
 
     /// <summary>
+    ///      Whether or not to apply Clumsy to using tools.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ClumsyTools = true;
+
+    /// <summary>
     ///      Lets you define a new "failed" message for each event.
     /// </summary>
     [DataField]
@@ -118,4 +124,10 @@ public sealed partial class ClumsyComponent : Component
 
     [DataField]
     public LocId VaulingFailedMessageForced = "clumsy-vaulting-fail-forced-message";
+
+    [DataField]
+    public LocId ToolFailedMessageSelf = "clumsy-tool-fail-message-user";
+
+    [DataField]
+    public LocId ToolFailedMessageOthers = "clumsy-tool-fail-message-others";
 }

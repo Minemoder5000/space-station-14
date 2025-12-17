@@ -9,6 +9,9 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -28,6 +31,7 @@ public sealed class ClumsySystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     public override void Initialize()
     {
@@ -36,6 +40,7 @@ public sealed class ClumsySystem : EntitySystem
         SubscribeLocalEvent<ClumsyComponent, SelfBeforeGunShotEvent>(BeforeGunShotEvent);
         SubscribeLocalEvent<ClumsyComponent, CatchAttemptEvent>(OnCatchAttempt);
         SubscribeLocalEvent<ClumsyComponent, SelfBeforeClimbEvent>(OnBeforeClimbEvent);
+        SubscribeLocalEvent<ClumsyComponent, SelfUsedToolEvent>(OnSelfUsedToolEvent);
     }
 
     // If you add more clumsy interactions add them in this section!
@@ -183,6 +188,29 @@ public sealed class ClumsySystem : EntitySystem
         }
 
         args.Cancel();
+    }
+
+    private void OnSelfUsedToolEvent(Entity<ClumsyComponent> ent, ref SelfUsedToolEvent args)
+    {
+        // Clumsy people sometimes hit themselves with tools!
+
+        // checks if ClumsyTools is false, if so, skips.
+        if (!ent.Comp.ClumsyTools)
+            return;
+
+        // TODO: Replace with RandomPredicted once the engine PR is merged
+        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent).Id);
+        var rand = new System.Random(seed);
+        if (!rand.Prob(ent.Comp.ClumsyDefaultCheck))
+            return;
+
+        // On Miss: Hit yourself. Idiot.
+        if (!TryComp<MeleeWeaponComponent>(args.Tool, out var meleeWeaponComponent))
+            return;
+
+        _melee.AttemptLightAttack(ent, args.Tool.Value, meleeWeaponComponent, ent);
+        _audio.PlayPvs(ent.Comp.ClumsySound, ent);
+
     }
     #endregion
 

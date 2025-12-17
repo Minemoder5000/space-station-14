@@ -59,6 +59,9 @@ public abstract partial class SharedToolSystem : EntitySystem
             RaiseLocalEvent(GetEntity(args.OriginalTarget.Value), (object) ev);
         else
             RaiseLocalEvent((object) ev);
+
+        var ev2 = new SelfUsedToolEvent(args.Used);
+        RaiseLocalEvent(args.User, ref ev2);
     }
 
     private void OnExamine(Entity<ToolComponent> ent, ref ExaminedEvent args)
@@ -341,4 +344,10 @@ public abstract partial class SharedToolSystem : EntitySystem
 [Serializable, NetSerializable]
 public sealed partial class CableCuttingFinishedEvent : SimpleDoAfterEvent;
 
+/// <summary>
+/// Event raised on an entity after it has used a tool.
+/// </summary>
+/// <param name="Tool">EntityUid of the tool used.</param>
+[ByRefEvent]
+public record struct SelfUsedToolEvent(EntityUid? Tool);
 #endregion
