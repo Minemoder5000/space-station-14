@@ -204,11 +204,13 @@ public sealed class ClumsySystem : EntitySystem
         if (!rand.Prob(ent.Comp.ClumsyDefaultCheck))
             return;
 
-        // On Miss: Hit yourself. Idiot.
+
         if (!TryComp<MeleeWeaponComponent>(args.Tool, out var meleeWeaponComponent))
             return;
 
-        _melee.AttemptLightAttack(ent, args.Tool.Value, meleeWeaponComponent, ent);
+        // On Miss: Hit yourself. Idiot.
+        _damageable.TryChangeDamage(ent.Owner, meleeWeaponComponent.Damage, origin: ent);
+        _stun.TryUpdateParalyzeDuration(ent, ent.Comp.ClumsyDefaultStunTime);
         _audio.PlayPvs(ent.Comp.ClumsySound, ent);
 
     }
