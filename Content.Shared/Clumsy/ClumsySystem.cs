@@ -217,16 +217,17 @@ public sealed class ClumsySystem : EntitySystem
         if (args.Tool == null)
         {
 
+            var ToolUsedName = "tool";
             _popup.PopupPredicted(
-                Loc.GetString(ent.Comp.NoToolFailedMessageSelf),
-                Loc.GetString(ent.Comp.NoToolFailedMessageOthers,
-                    ("victim", Identity.Entity(ent.Owner, EntityManager)),
+                Loc.GetString(ent.Comp.ToolFailedMessageSelf, ("tool", ToolUsedName)),
+                Loc.GetString(ent.Comp.ToolFailedMessageOthers,
+                    ("victim", Identity.Entity(ent.Owner, EntityManager), ("tool", ToolUsedName)),
                     ent,
                     ent)
             );
         }
 
-        else // maybe if tool is null just set ToolUsedName to tool?
+        else
         {
 
             var ToolUsedName = Identity.Entity(args.Tool, EntityManager);
