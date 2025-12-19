@@ -211,7 +211,36 @@ public sealed class ClumsySystem : EntitySystem
         // On Miss: Hit yourself. Idiot.
         _damageable.TryChangeDamage(ent.Owner, meleeWeaponComponent.Damage, origin: ent);
         _stun.TryUpdateParalyzeDuration(ent, ent.Comp.ClumsyDefaultStunTime);
+        _audio.PlayPvs(meleeWeaponComponent.HitSound, ent);
         _audio.PlayPvs(ent.Comp.ClumsySound, ent);
+
+        if (args.Tool == null)
+        {
+
+            _popup.PopupPredicted(
+                Loc.GetString(ent.Comp.NoToolFailedMessageSelf),
+                Loc.GetString(ent.Comp.NoToolFailedMessageOthers,
+                    ("victim", Identity.Entity(ent.Owner, EntityManager)),
+                    ent,
+                    ent)
+            );
+        }
+
+        else // maybe if tool is null just set ToolUsedName to tool?
+        {
+
+            var ToolUsedName = Identity.Entity(args.Tool, EntityManager);
+            _popup.PopupPredicted(
+                Loc.GetString(ent.Comp.ToolFailedMessageSelf, ("tool", ToolUsedName)),
+                Loc.GetString(ent.Comp.ToolFailedMessageOthers,
+                    ("victim", Identity.Entity(ent.Owner, EntityManager), ("tool", ToolUsedName)),
+                    ent,
+                    ent)
+            );
+        }
+
+        // This has better performance
+        args.Cancelled = true;
 
     }
     #endregion
@@ -233,6 +262,7 @@ public sealed class ClumsySystem : EntitySystem
         }
 
         _stun.TryUpdateParalyzeDuration(target, stunTime);
+
     }
     #endregion
 }

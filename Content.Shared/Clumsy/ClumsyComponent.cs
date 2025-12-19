@@ -130,4 +130,11 @@ public sealed partial class ClumsyComponent : Component
 
     [DataField]
     public LocId ToolFailedMessageOthers = "clumsy-tool-fail-message-others";
+
+    //The tool can be null, so fallback to this
+    [DataField]
+    public LocId NoToolFailedMessageSelf = "clumsy-no-tool-fail-message-user";
+
+    [DataField]
+    public LocId NoToolFailedMessageOthers = "clumsy-no-tool-fail-message-others";
 }

@@ -49,6 +49,13 @@ public abstract partial class SharedToolSystem : EntitySystem
 
     private void OnDoAfter(EntityUid uid, ToolComponent tool, ToolDoAfterEvent args)
     {
+
+        var ev2 = new SelfUsedToolEvent(args.Used, false);
+        RaiseLocalEvent(args.User, ref ev2);
+
+        if (ev2.Cancelled)
+            return;
+
         if (!args.Cancelled)
             PlayToolSound(uid, tool, args.User);
 
@@ -59,9 +66,6 @@ public abstract partial class SharedToolSystem : EntitySystem
             RaiseLocalEvent(GetEntity(args.OriginalTarget.Value), (object) ev);
         else
             RaiseLocalEvent((object) ev);
-
-        var ev2 = new SelfUsedToolEvent(args.Used);
-        RaiseLocalEvent(args.User, ref ev2);
     }
 
     private void OnExamine(Entity<ToolComponent> ent, ref ExaminedEvent args)
@@ -349,5 +353,5 @@ public sealed partial class CableCuttingFinishedEvent : SimpleDoAfterEvent;
 /// </summary>
 /// <param name="Tool">EntityUid of the tool used.</param>
 [ByRefEvent]
-public record struct SelfUsedToolEvent(EntityUid? Tool);
+public record struct SelfUsedToolEvent(EntityUid? Tool, bool Cancelled = false);
 #endregion
