@@ -253,6 +253,8 @@
       path: /Audio/Voice/Diona/diona_scream.ogg
     Laugh:
       collection: DionaLaugh
+    Sneeze:
+      path: /Audio/Voice/Diona/diona_scream.ogg
     Chirp:
       path: /Audio/Animals/nymph_chirp.ogg
     Honk:
