@@ -479,7 +479,7 @@
     Laugh:
       collection: MaleLaugh
     Sneeze:
-      collection: MaleSneezes
+      path: /Audio/Voice/Vulpkanin/vulp_sneeze.ogg
     Cough:
       collection: MaleCoughs
     Whistle:
@@ -521,7 +521,7 @@
     Laugh:
       collection: FemaleLaugh
     Sneeze:
-      collection: FemaleSneezes
+      path: /Audio/Voice/Vulpkanin/dog_sneeze.ogg
     Cough:
       collection: FemaleCoughs
     Whistle:
