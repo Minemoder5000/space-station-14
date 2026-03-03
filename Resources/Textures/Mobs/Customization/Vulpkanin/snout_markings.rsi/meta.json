@@ -25,6 +25,10 @@
             "directions": 4
         },
         {
+            "name": "snout-round",
+            "directions": 4
+        },
+        {
             "name": "snout-nose",
             "directions": 4
         },

@@ -9,6 +9,14 @@
       state: snout
 
 - type: marking
+  id: VulpSnoutRound
+  bodyPart: Snout
+  groupWhitelist: [ Vulpkanin ]
+  sprites:
+    - sprite: Mobs/Customization/Vulpkanin/snout_markings.rsi
+      state: snout-round
+
+- type: marking
   id: VulpSnoutNose
   bodyPart: SnoutCover
   groupWhitelist: [ Vulpkanin ]

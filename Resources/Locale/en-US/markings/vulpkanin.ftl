@@ -47,6 +47,9 @@ marking-VulpEarShock = Vulpkanin Shock
 marking-VulpSnout-snout = Snout
 marking-VulpSnout = Vulpkanin Snout
 
+marking-VulpSnoutRound-snout-round = Rounded Snout
+marking-VulpSnoutRound = Vulpkanin Rounded Snout
+
 marking-VulpSnoutNose-snout-nose = Nose
 marking-VulpSnoutNose = Vulpkanin Nose
 
